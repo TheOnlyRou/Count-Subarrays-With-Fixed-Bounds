@@ -12,20 +12,25 @@ class Solution {
   static int countSubarrays(List<int> nums, int minK, int maxK) {
     var count = 0;
     List<int> mins = [], maxs = [];
-    for(var i=0; i<nums.length;i++)
-    {
-      if(nums[i] == minK) mins.add(i);
-      if(nums[i] == maxK) maxs.add(i);
+    for (var i = 0; i < nums.length; i++) {
+      if (nums[i] == minK) mins.add(i);
+      if (nums[i] == maxK) maxs.add(i);
     }
     print("mins: $mins, maxs: $maxs");
-    for (var max in maxs) {
-      for (var min in mins) {
-        print("indexmin: ${min}, indexmax: ${min}");
-        if (nums[max] > nums[min]) {
-          count++;
+    for (var min in mins) {
+      for (var max in maxs) {
+        print(" min[${min}]= ${nums[min]}, max[${max}]=${nums[max]}");
+        if (mins == maxs) {
+          if (max > min) {
+            count++;
+          }
+        }else{
+          if (nums[max] >= nums[min]) {
+            count++;
+          }
         }
       }
-      // max = -1;
+      nums[min] = -1;
     }
     return count;
   }
